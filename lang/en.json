@@ -1,0 +1,6 @@
+{
+  "ROLL20IMPORT.Title": "Roll20 Import",
+  "ROLL20IMPORT.OpenButton": "Import a Roll20 campaign",
+  "ROLL20IMPORT.SettingAssetPath": "Image folder",
+  "ROLL20IMPORT.SettingAssetPathHint": "Where imported images are stored. Leave blank to keep them inside this world's folder."
+}

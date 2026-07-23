@@ -1,0 +1,122 @@
+<section class="r20-dialog stage-{{stage}}">
+
+  {{#if error}}
+  <div class="r20-error" role="alert">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <span>{{error}}</span>
+  </div>
+  {{/if}}
+
+  {{!-- ------------------------------------------------ pick --}}
+  {{#if (eq stage "pick")}}
+  <div class="r20-step">
+    <p class="r20-lede">
+      Choose the .zip that R20Exporter produced. Nothing is written to your world
+      until you review what it contains.
+    </p>
+
+    <div class="drop-target" data-action="chooseFile" role="button" tabindex="0">
+      <i class="fa-solid fa-file-zipper"></i>
+      <span class="drop-title">Drop the archive here</span>
+      <span class="drop-hint">or click to browse</span>
+    </div>
+
+    <input type="file" id="roll20-zip" accept=".zip,application/zip" hidden>
+  </div>
+  {{/if}}
+
+  {{!-- ---------------------------------------------- working --}}
+  {{#if (eq stage "working")}}
+  <div class="r20-step r20-working">
+    <p class="r20-progress-label">{{progress.message}}</p>
+    <div class="r20-bar" role="progressbar" aria-valuenow="{{progress.pct}}" aria-valuemin="0" aria-valuemax="100">
+      <div class="r20-bar-fill" style="width: {{progress.pct}}%"></div>
+    </div>
+    <p class="r20-progress-pct">{{progress.pct}}%</p>
+  </div>
+  {{/if}}
+
+  {{!-- ----------------------------------------------- review --}}
+  {{#if (eq stage "review")}}
+  <div class="r20-step">
+    {{#if parsed.campaignName}}
+    <h2 class="r20-campaign">{{parsed.campaignName}}</h2>
+    {{/if}}
+
+    <ul class="r20-counts">
+      <li><span class="n">{{parsed.scenes}}</span><span class="l">scenes</span></li>
+      <li><span class="n">{{parsed.pcs}}</span><span class="l">characters</span></li>
+      <li><span class="n">{{parsed.npcs}}</span><span class="l">NPCs</span></li>
+      <li><span class="n">{{parsed.decks}}</span><span class="l">decks</span></li>
+    </ul>
+
+    {{#if parsed.warnings.length}}
+    <ul class="r20-warnings">
+      {{#each parsed.warnings}}<li>{{this}}</li>{{/each}}
+    </ul>
+    {{/if}}
+
+    <fieldset class="r20-options">
+      <legend>When something already exists</legend>
+
+      <label class="r20-radio">
+        <input type="radio" name="mode" value="overwrite" {{#if (eq mode "overwrite")}}checked{{/if}}>
+        <span>
+          <strong>Replace it</strong>
+          <em>Updates what a previous run created. Any edits you've made in Foundry are lost.</em>
+        </span>
+      </label>
+
+      <label class="r20-radio">
+        <input type="radio" name="mode" value="duplicate" {{#if (eq mode "duplicate")}}checked{{/if}}>
+        <span>
+          <strong>Add a copy</strong>
+          <em>Leaves existing documents alone and creates new ones alongside them.</em>
+        </span>
+      </label>
+
+      <label class="r20-check">
+        <input type="checkbox" name="reuseImages" {{#if reuseImages}}checked{{/if}}>
+        <span>Reuse images already uploaded <em>Much faster on repeat runs.</em></span>
+      </label>
+    </fieldset>
+
+    <footer class="r20-actions">
+      <button type="button" data-action="back" class="r20-secondary">
+        <i class="fa-solid fa-arrow-left"></i> Choose another file
+      </button>
+      <button type="button" data-action="startImport" class="r20-primary">
+        <i class="fa-solid fa-file-import"></i> Import
+      </button>
+    </footer>
+  </div>
+  {{/if}}
+
+  {{!-- ------------------------------------------------- done --}}
+  {{#if (eq stage "done")}}
+  <div class="r20-step">
+    <h2 class="r20-done-title">Import finished</h2>
+
+    <ul class="r20-counts">
+      <li><span class="n">{{report.scenes}}</span><span class="l">scenes</span></li>
+      <li><span class="n">{{report.actors}}</span><span class="l">actors</span></li>
+      <li><span class="n">{{report.journals}}</span><span class="l">journals</span></li>
+      <li><span class="n">{{report.images}}</span><span class="l">images</span></li>
+    </ul>
+
+    {{#if report.notes.length}}
+    <div class="r20-notes">
+      <h3>Worth a look</h3>
+      <ul>
+        {{#each report.notes}}<li>{{this}}</li>{{/each}}
+      </ul>
+    </div>
+    {{/if}}
+
+    <footer class="r20-actions">
+      <button type="button" data-action="close" class="r20-primary">Done</button>
+    </footer>
+  </div>
+  {{/if}}
+
+</section>
