@@ -2,7 +2,7 @@
   "id": "roll20-import",
   "title": "Roll20 Importer",
   "description": "Bring a Roll20 campaign export into Foundry: scenes, tokens, actors, and journals.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "compatibility": {
     "minimum": "13",
     "verified": "13",
@@ -43,5 +43,5 @@
   "readme": "https://github.com/TheOtherFawkes/Roll20-Importer/blob/main/README.md",
   "bugs": "https://github.com/TheOtherFawkes/Roll20-Importer/issues",
   "manifest": "https://github.com/TheOtherFawkes/Roll20-Importer/releases/latest/download/module.json",
-  "download": "https://github.com/TheOtherFawkes/Roll20-Importer/releases/download/v0.3.0/module.zip"
+  "download": "https://github.com/TheOtherFawkes/Roll20-Importer/releases/download/v0.4.0/module.zip"
 }
